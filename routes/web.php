@@ -37,6 +37,13 @@ Route::get('/image', function(){
 
 });
 
+Route::get('/shop', function(){
+    return view('cart.shop');
+});
+
+Route::get('/cart', function(){
+    return view('cart.cart');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
