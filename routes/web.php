@@ -1,7 +1,10 @@
 <?php
 
+use App\Helpers\MyCustomModifier;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +24,19 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/image', function(){
+    $manager = new ImageManager(new Driver());
+    //read image in filepath
+    $image = $manager->read('Image.jpg');
+
+    $image->modify(new MyCustomModifier());
+    $image->toPng()->save('image123.png');
+
+    return "test123";
+
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
