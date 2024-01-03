@@ -32,9 +32,8 @@
                             <p><strong>Blue denim shirt</strong></p>
                             <p>Color: blue</p>
                             <p>Size: M</p>
-                            <button type="button" class="btn btn-danger btn-sm me-1 mb-2 mt-2" title="Remove item">
-                                Remove
-                            </button>
+                            <button class="btn btn-danger mt-2 btn-block">Remove</button>
+
                             <!-- Data -->
                         </div>
 
@@ -95,7 +94,7 @@
                         </li>
                     </ul>
 
-                    <button type="button" class="btn btn-success btn-lg btn-block">
+                    <button class="btn btn-success mt-2 btn-block">
                         Go to checkout
                     </button>
                 </div>

@@ -10,10 +10,10 @@
             <div class="card" style="width: 18rem;">
                 <img src="image.jpg" class="card-img-top" alt="Product Image">
                 <div class="card-body">
-                    <h5 class="card-title">Montano Kiseo</h5>
+                    <h5 class="card-title font-weight-normal">Montano Kiseo</h5>
                     <p class="card-text">Product Description goes here.</p>
                     <p class="card-text">Price: $99.99</p>
-                    <button class="btn btn-danger mt-2">Add to Cart</button>
+                    <button class="btn btn-danger mt-2 btn-block">Add to Cart</button>
                 </div>
             </div>
         </div>
