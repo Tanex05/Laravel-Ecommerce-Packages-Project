@@ -40,7 +40,7 @@ Route::get('/image', function(){
 
 Route::get('/shop', [CartController::class,'shop'])->name('shop');
 Route::get('/cart', [CartController::class,'cart'])->name('cart');
-
+Route::get('/add-to-cart/{product_id}', [CartController::class,'addToCart'])->name('add-to-cart');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
