@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\MyCustomModifier;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -37,13 +38,9 @@ Route::get('/image', function(){
 
 });
 
-Route::get('/shop', function(){
-    return view('cart.shop');
-});
+Route::get('/shop', [CartController::class,'shop'])->name('shop');
+Route::get('/cart', [CartController::class,'cart'])->name('cart');
 
-Route::get('/cart', function(){
-    return view('cart.cart');
-});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -52,3 +49,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
