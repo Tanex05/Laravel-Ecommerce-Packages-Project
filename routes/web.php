@@ -42,6 +42,10 @@ Route::get('/shop', [CartController::class,'shop'])->name('shop');
 Route::get('/cart', [CartController::class,'cart'])->name('cart');
 Route::get('/add-to-cart/{product_id}', [CartController::class,'addToCart'])->name('add-to-cart');
 
+Route::get('/qty-increment/{rowId}', [CartController::class,'qTyIncrement'])->name('qTyIncrement');
+Route::get('/qty-decrement/{rowId}', [CartController::class,'qTyDecrement'])->name('qTyDecrement');
+Route::get('/remove-product/{rowId}', [CartController::class,'removeProduct'])->name('remove-product');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

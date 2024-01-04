@@ -7,65 +7,83 @@
 
    <div class="container py-5">
     <div class="row justify-content-center my-4">
+
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss='alert'></button>
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif
+
+
+
         <div class="col-md-8">
             <div class="card mb-4">
                 <div class="card-header py-3">
                     <h5 class="mb-0">Cart - 2 items</h5>
                 </div>
                 <div class="card-body">
-                    <!-- Single item -->
-                    <div class="row">
-                        <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-                            <!-- Image -->
-                            <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/12a.webp"
-                                    class="w-100" alt="Blue Jeans Jacket" />
-                                <a href="#!">
-                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
-                                </a>
-                            </div>
-                            <!-- Image -->
-                        </div>
 
-                        <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
-                            <!-- Data -->
-                            <p><strong>Blue denim shirt</strong></p>
-                            <p>Color: blue</p>
-                            <p>Size: M</p>
-                            <button class="btn btn-danger mt-2 btn-block">Remove</button>
 
-                            <!-- Data -->
-                        </div>
+                    @foreach ( Cart::content() as $product )
 
-                        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                            <!-- Quantity -->
-                            <div class="d-flex align-items-center mb-4" style="max-width: 300px">
-                                <!-- Minus -->
-                                <button class="btn btn-primary me-2 mb-3">
-                                    &#8722;
-                                </button>
-
-                                <div class="form-outline flex-grow-1 mt-3 ">
-                                    <input id="form1" min="0" name="quantity" value="1" type="number"
-                                        class="form-control" />
-                                    <label class="form-label" for="form1">Quantity</label>
+                        <!-- Single item -->
+                        <div class="row">
+                            <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                                <!-- Image -->
+                                <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                                    <img src="{{ $product->options->image }}"
+                                        class="w-100" alt="{{ $product->name }}" />
+                                    <a href="#!">
+                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                    </a>
                                 </div>
-
-                                <!-- Plus -->
-                                <button class="btn btn-primary  ms-2 mb-3">
-                                    &#43;
-                                </button>
+                                <!-- Image -->
                             </div>
-                            <!-- Quantity -->
 
-                            <!-- Price -->
-                            <p class="text-start text-md-center">
-                                <strong>$17.99</strong>
-                            </p>
-                            <!-- Price -->
+                            <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                                <!-- Data -->
+                                <p><strong>{{ $product->name }}</strong></p>
+                                <p>Color: blue</p>
+                                <p>Size: M</p>
+                                <a href="{{ route('remove-product', $product->rowId) }}" class="btn btn-danger mt-2 btn-block">Remove</a>
+
+                                <!-- Data -->
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                <!-- Quantity -->
+                                <div class="d-flex align-items-center mb-4" style="max-width: 300px">
+                                    <!-- Minus -->
+                                    <a href="{{ route('qTyDecrement', $product->rowId) }}" class="btn btn-primary me-2 mb-3">
+                                        &#8722;
+                                    </a>
+
+                                    <div class="form-outline flex-grow-1 mt-3 ">
+                                        <input id="form1" min="0" name="quantity" value="{{ $product->qty }}" type="number"
+                                            class="form-control" />
+                                        <label class="form-label" for="form1">Quantity</label>
+                                    </div>
+
+                                    <!-- Plus -->
+                                    <a href="{{ route('qTyIncrement', $product->rowId) }}" class="btn btn-primary  ms-2 mb-3">
+                                        &#43;
+                                    </a>
+                                </div>
+                                <!-- Quantity -->
+
+                                <!-- Price -->
+                                <p class="text-start text-md-center">
+                                    <strong>${{ $product->price }}</strong>
+                                </p>
+                                <!-- Price -->
+                            </div>
                         </div>
-                    </div>
-                    <!-- Single item -->
+                        <hr class="mt-2 mb-2">
+                        <!-- Single item -->
+                    @endforeach
+
+
                 </div>
             </div>
         </div>
