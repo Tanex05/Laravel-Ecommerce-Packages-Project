@@ -3,6 +3,7 @@
 use App\Helpers\MyCustomModifier;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
@@ -71,7 +72,8 @@ Route::get('/create-role', function(){
 });
 
 Route::get('/posts', function(){
-
+    $posts = Post::all();
+    return view('posts.post',compact('posts'));
 });
 
 
