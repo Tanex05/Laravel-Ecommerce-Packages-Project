@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
+use Laravel\Socialite\Facades\Socialite;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -78,7 +79,15 @@ Route::get('/posts', function(){
 
 });
 
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('github')->redirect();
+})->name('github.login');
 
+Route::get('/auth/callback', function () {
+    $user = Socialite::driver('github')->user();
+
+    dd($user);
+});
 
 
 Route::middleware('auth')->group(function () {
