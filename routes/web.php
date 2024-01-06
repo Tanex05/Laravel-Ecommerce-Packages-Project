@@ -6,6 +6,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,35 @@ Route::get('/add-to-cart/{product_id}', [CartController::class,'addToCart'])->na
 Route::get('/qty-increment/{rowId}', [CartController::class,'qTyIncrement'])->name('qTyIncrement');
 Route::get('/qty-decrement/{rowId}', [CartController::class,'qTyDecrement'])->name('qTyDecrement');
 Route::get('/remove-product/{rowId}', [CartController::class,'removeProduct'])->name('remove-product');
+
+Route::get('/create-role', function(){
+    //$role = Role::create(['name'=> 'publisher']);
+    // $permission = Permission::create(['name' => 'edit articles']);
+    // return $permission;
+
+    // $user = auth()->user()->load(['roles','permissions']);
+    // // $user->assignRole('writer');
+    // $user->givePermissionTo('edit articles');
+
+    $user = auth()->user();
+    // $user->getPermissionNames();
+
+    if($user->can('edit articles')){
+        return "User has permission";
+    }else{
+        return "User dosen't have permission";
+    }
+
+
+
+});
+
+Route::get('/posts', function(){
+
+});
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
