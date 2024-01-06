@@ -72,8 +72,10 @@ Route::get('/create-role', function(){
 });
 
 Route::get('/posts', function(){
+
     $posts = Post::all();
     return view('posts.post',compact('posts'));
+
 });
 
 
