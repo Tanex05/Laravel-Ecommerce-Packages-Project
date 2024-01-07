@@ -31,9 +31,16 @@
                                 <h4 class="card-title text-primary" style="font-size: 20px">${{ $product->price}}</h4>
                                 <p class="card-text">{{ $product->description }}</p>
 
-                                <div class="d-flex flex-column">
+                                {{-- <div class="d-flex flex-column">
                                     <a href="{{ route('add-to-cart', $product->id)}}" class="btn btn-primary mt-3 btn-block">Add to Cart</a>
-                                </div>
+                                </div> --}}
+                                <form action="{{ route('paypal.payment') }}"  method="POST">
+                                    @csrf
+                                    <div class="d-flex flex-column">
+                                        <input type="hidden" value="{{ $product->price }}" name="price">
+                                        <button type="submit" type="submit" class="btn btn-primary mt-3 btn-block">BUY NOW</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

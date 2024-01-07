@@ -2,6 +2,7 @@
 
 use App\Helpers\MyCustomModifier;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\Gateway\PayPalController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
@@ -67,9 +68,6 @@ Route::get('/create-role', function(){
     }else{
         return "User dosen't have permission";
     }
-
-
-
 });
 
 Route::get('/posts', function(){
@@ -88,6 +86,10 @@ Route::get('/auth/callback', function () {
 
     dd($user);
 });
+
+Route::post('/paypal/payment', [PayPalController::class,'payment'])->name('paypal.payment');
+Route::get('/paypal/success', [PayPalController::class,'success'])->name('paypal.success');
+Route::get('/paypal/cancel', [PayPalController::class,'cancel'])->name('paypal.cancel');
 
 
 Route::middleware('auth')->group(function () {
